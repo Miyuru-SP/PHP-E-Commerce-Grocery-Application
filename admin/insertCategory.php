@@ -22,6 +22,7 @@
 
 ?>
 
+<h2 class="text-center">Insert Categories</h2>
 <form action="" method="post" class="mb-2">
 
   <div class="input-group mb-2 w-90">

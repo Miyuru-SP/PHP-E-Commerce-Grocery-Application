@@ -31,7 +31,7 @@
     <!-- navbar -->
      <nav class="navbar navbar-expand-lg bg-body-secondary ">
             <div class="container-fluid">
-                <img src="../images/logo.png" alt="" class="logo">
+                <a href="index.php"><img src="../images/logo.png" alt="" class="logo"></a>
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -51,9 +51,9 @@
     </div>
 
     <!-- links -->
-     <div class="row">        
+     <div class="row ">        
             <div class="button text-center">
-                <a href="#"><button type="button" class="btn btn-primary">Insert Products</button></a>
+                <a href="insertProducts.php"><button type="button" class="btn btn-primary">Insert Products</button></a>
                 <a href="#"><button type="button" class="btn btn-primary">View Products</button></a>
                 <a href="#"><button type="button" class="btn btn-primary">view Category</button></a>
                 <a href="index.php?insertCategory"><button type="button" class="btn btn-primary">Insert Category</button></a>
