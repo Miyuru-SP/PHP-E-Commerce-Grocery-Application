@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Web</title>
+    <title>Cart Details</title>
     <!-- bootstrap css  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- font awsome -->
@@ -16,8 +16,20 @@
     <!-- css -->
      <link rel="stylesheet" href="style.css">
 
+     <style>
+        .cart_image{
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+     </style>
+
 </head>
 <body>
+    <?php
+        cart();
+    ?>
+
     <!-- navbar -->
      <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-body-secondary ">
@@ -41,7 +53,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="cart.php">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <sup>
                             <?php
@@ -49,14 +61,12 @@
                             ?>
                         </sup>
                     </a>
-                </li>  
+                </li> 
             </ul>
-
             <form class="d-flex" role="search" action="searchProducts.php" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
                 <input type="submit" value="Search" class="btn btn-outline-primary" name="search_data_product">
             </form>
-
             <ul class="navbar-nav me-2 mb-lg-0">
                 <li class="nav item">
                     <a class="nav-link" href="#">Guest</a>
@@ -79,59 +89,74 @@
     </p>
 </div>
 
-<!-- row -->
-<div class="row p-2">
-    <div class="col-md-2 bg-light p-0">
-        <!-- brands -->
-        <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-dark bg-opacity-60">
-                <a href="#" class="nav-link text-light"><h4>Delivery Brands</h4></a>
-            </li>
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Product Title</th>
+                    <th>Product Image</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Remove</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    global $conn;
+                    $get_ip_add = getIPAddress();
+                    $total_price = 0;
+                    $cart_query = "SELECT * from `cart` where ip_address = '$get_ip_add'";
+                    $result = mysqli_query($conn, $cart_query);
+                    
+                    while($row = mysqli_fetch_array($result)){
+                        $product_id = $row['product_id'];
+                        $select_products = "SELECT * from `products` where product_id = '$product_id'";
+                        $result_products = mysqli_query($conn, $select_products);
+                        while($row_product = mysqli_fetch_array($result_products)){
+                            $product_price = $row_product['product_price'];
+                            $price_table = $row_product['product_price'];
+                            $product_title = $row_product['product_title'];
+                            $product_image = $row_product['product_image'];
+                            $total_price += $product_price;
+                ?>
+                <tr>
+                    <td><?php echo $product_title ?></td>
+                    <td><img src="./images/<?php echo $product_image ?>" class='cart_image'></td>
+                    <td><input type="text" name="" id="" class="form-input w-50"></td>
+                    <td><?php echo $product_price ?></td>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>
+                        <button class="btn btn-warning">Update</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger">Remove</button>
+                    </td>
+                </tr>
+                <?php
+                        }
+                    }
+                ?>
+            </tbody>
+        </table>
 
-            <?php
-                getBrands()
-            ?>
-
-        </ul>
-        <!-- categories -->
-        <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-dark bg-opacity-30">
-                <a href="#" class="nav-link text-light"><h4>Categories</h4></a>
-            </li>
-
-            <?php
-                getCategories();
-            ?>
-           
-        </ul>
-
-    </div>
-
-    <div class="col-md-10">
-        <!-- products -->
-        <div class="row">
-
-        <?php
-            getAllProducts();
-            getUniqueCategories();
-            getUniqueBrands();
-        ?>
-
+        <div class="d-flex mb-5">
+            <h4 class="px-3">Subtotal: RS.  
+                <strong class="text-primary"><?php echo $total_price ?></strong>
+            </h4>
+            <a href="index.php"><button class=" px-3 py-2 border-0 mx-3 text-light btn btn-primary">Continue Shopping</button></a>
+            <a href="#"><button class="px-3 py-2 border-0 text-light btn btn-success">Checkout</button></a>
         </div>
     </div>
-
-    
 </div>
-
-
-
 
 
 <!-- footer-->
 <?php
     include ('./includes/footer.php');
 ?>
-
 
 <!-- bootstrap js  -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

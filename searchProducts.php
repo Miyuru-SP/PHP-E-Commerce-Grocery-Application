@@ -1,6 +1,6 @@
 <?php
   include("includes\connect.php");
-  include("functions/commonFunctions.php");
+  include("functions/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +41,15 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><sup>1</sup></a>
-                </li> 
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <sup>
+                            <?php
+                                cart_items();
+                            ?>
+                        </sup>
+                    </a>
+                </li>  
             </ul>
             <form class="d-flex" role="search" action="" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">

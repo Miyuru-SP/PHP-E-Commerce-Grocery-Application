@@ -1,6 +1,6 @@
 <?php
   include("includes\connect.php");
-  include("functions/commonFunctions.php");
+  include("functions/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +41,15 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><sup>1</sup></a>
-                </li> 
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <sup>
+                            <?php
+                                cart_items();
+                            ?>
+                        </sup>
+                    </a>
+                </li>  
             </ul>
             <form class="d-flex" role="search" action="searchProducts.php" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
@@ -101,8 +108,8 @@
     <div class="col-md-10">
         <!-- products -->
         <div class="row">
-            <!-- card
-            <div class="col-md-4">
+            <!-- card -->
+            <!-- <div class="col-md-4">
                 <div class='card'>
                     <img src='./images/lassi.png' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
@@ -112,11 +119,11 @@
                         <a href='product_details.php?category_id=$category_id' class='btn btn-dark'>View more</a>
                     </div>
                 </div>
-            </div>
-             related cards 
+            </div> -->
+             <!-- related cards  -->
             <div class="col-md-8">
                 
-            </div> -->
+            </div>
 
         <?php
             viewMoreProducts();

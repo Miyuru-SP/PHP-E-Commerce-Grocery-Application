@@ -1,6 +1,6 @@
 <?php
   include("includes\connect.php");
-  include("functions/commonFunctions.php");
+  include("functions/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +18,10 @@
 
 </head>
 <body>
+    <?php
+        cart();
+    ?>
+
     <!-- navbar -->
      <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-body-secondary ">
@@ -41,7 +45,14 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><sup>1</sup></a>
+                    <a class="nav-link" href="cart.php">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <sup>
+                            <?php
+                                cart_items();
+                            ?>
+                        </sup>
+                    </a>
                 </li> 
             </ul>
             <form class="d-flex" role="search" action="searchProducts.php" method="get">
@@ -106,6 +117,8 @@
             getProducts();
             getUniqueCategories();
             getUniqueBrands();
+            // $ip = getIPAddress();  
+            // echo 'User Real IP Address - '.$ip; 
         ?>
 
         </div>
