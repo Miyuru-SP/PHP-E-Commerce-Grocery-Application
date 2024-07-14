@@ -338,7 +338,7 @@ function cart(){
             echo "<script>alert('This item is already inside the cart')</script>";
             echo "<script>window.open('index.php', '_self')</script>";
         }else{
-            $insert_query = "insert into `cart` (product_id, ip_address, quantity) values ($get_product_id, '$get_ip_add', 0)";
+            $insert_query = "insert into `cart` (product_id, ip_address, quantity) values ($get_product_id, '$get_ip_add', 1)";
             $result_query = mysqli_query($conn, $insert_query);
             echo "<script>alert('This item is added to the cart')</script>";
             echo "<script>window.open('index.php', '_self')</script>";            
@@ -346,22 +346,33 @@ function cart(){
     }
 }
 
+// function cart_items(){
+//     if(isset($_GET['add_to_cart'])){
+//         global $conn;
+//         $get_ip_add = getIPAddress();
+//         $select_query = "SELECT * from `cart` where ip_address = '$get_ip_add'";
+//         $result_query = mysqli_query($conn, $select_query);
+//         $count_cart_items = mysqli_num_rows($result_query);
+//     }else{
+//         global $conn;
+//         $get_ip_add = getIPAddress();
+//         $select_query = "SELECT * from `cart` where ip_address = '$get_ip_add'";
+//         $result_query = mysqli_query($conn, $select_query);
+//         $count_cart_items = mysqli_num_rows($result_query);           
+//     }
+//     echo $count_cart_items;    
+// } //after e
+
 function cart_items(){
-    if(isset($_GET['add_to_cart'])){
-        global $conn;
-        $get_ip_add = getIPAddress();
-        $select_query = "SELECT * from `cart` where ip_address = '$get_ip_add'";
-        $result_query = mysqli_query($conn, $select_query);
-        $count_cart_items = mysqli_num_rows($result_query);
-    }else{
-        global $conn;
-        $get_ip_add = getIPAddress();
-        $select_query = "SELECT * from `cart` where ip_address = '$get_ip_add'";
-        $result_query = mysqli_query($conn, $select_query);
-        $count_cart_items = mysqli_num_rows($result_query);           
-    }
-    echo $count_cart_items;    
+    global $conn;
+    $get_ip_add = getIPAddress();
+    $select_query = "SELECT * FROM `cart` WHERE ip_address = '$get_ip_add'";
+    $result_query = mysqli_query($conn, $select_query);
+    $count_cart_items = mysqli_num_rows($result_query);
+    
+    echo $count_cart_items;
 }
+
 
 function totalCartPrice(){
     global $conn;
