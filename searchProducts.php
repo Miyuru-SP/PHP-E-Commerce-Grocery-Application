@@ -44,7 +44,7 @@
                     <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><sup>1</sup></a>
                 </li> 
             </ul>
-            <form class="d-flex" role="search" action="searchProducts.php" method="get">
+            <form class="d-flex" role="search" action="" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
                 <input type="submit" value="Search" class="btn btn-outline-primary" name="search_data_product">
             </form>
@@ -103,7 +103,7 @@
         <div class="row">
 
         <?php
-            getProducts();
+            searchProducts();
             getUniqueCategories();
             getUniqueBrands();
         ?>

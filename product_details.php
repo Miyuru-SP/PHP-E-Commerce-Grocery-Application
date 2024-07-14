@@ -101,9 +101,25 @@
     <div class="col-md-10">
         <!-- products -->
         <div class="row">
+            <!-- card
+            <div class="col-md-4">
+                <div class='card'>
+                    <img src='./images/lassi.png' class='card-img-top' alt='$product_title'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>$product_title</h5>
+                        <p class='card-text'>$product_description</p>
+                        <a href='#' class='btn btn-primary'>Add to Cart</a>
+                        <a href='product_details.php?category_id=$category_id' class='btn btn-dark'>View more</a>
+                    </div>
+                </div>
+            </div>
+             related cards 
+            <div class="col-md-8">
+                
+            </div> -->
 
         <?php
-            getProducts();
+            viewMoreProducts();
             getUniqueCategories();
             getUniqueBrands();
         ?>
