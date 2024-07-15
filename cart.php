@@ -1,6 +1,6 @@
 <?php
-  include("includes/connect.php");
-  include("functions/functions.php");
+  include("./includes/connect.php");
+  include("./functions/functions.php");
 
   function removeCartItems(){
     global $conn;
@@ -201,7 +201,7 @@ echo updateCartItems();
           <div class="d-flex mb-5">
             <h4 class="px-3">Subtotal: Rs. <strong class="text-primary"><?php echo number_format($total_price, 2) ?></strong></h4>
             <a href="index.php"><button type="button" class="px-3 py-2 border-0 mx-3 text-light btn btn-primary">Continue Shopping</button></a>
-            <a href="#"><button type="button" class="px-3 py-2 border-0 text-light btn btn-success">Checkout</button></a>
+            <a href="checkout.php"><button type="button" class="px-3 py-2 border-0 text-light btn btn-success">Checkout</button></a>
           </div>
         <?php else: ?>
           <h2 class="text-center text-danger">Cart is Empty</h2>

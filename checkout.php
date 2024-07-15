@@ -1,6 +1,6 @@
 <?php
-  include("includes\connect.php");
-  include("functions/functions.php");
+  include("./includes/connect.php"); // Adjusted path
+  include("./functions/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
                     <a class="nav-link" href="#">Guest</a>
                 </li>
                 <li class="nav item">
-                    <a class="nav-link" href="./user/userLogin.php">Login</a>
+                    <a class="nav-link" href="#">Login</a>
                 </li>
             </u>
             </div>
@@ -82,47 +82,27 @@
 </div>
 
 <!-- row -->
-<div class="row p-2">
-    <div class="col-md-2 bg-light p-0">
-        <!-- brands -->
-        <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-dark bg-opacity-60">
-                <a href="#" class="nav-link text-light"><h4>Delivery Brands</h4></a>
-            </li>
-
-            <?php
-                getBrands()
-            ?>
-
-        </ul>
-        <!-- categories -->
-        <ul class="navbar-nav me-auto text-center">
-            <li class="nav-item bg-dark bg-opacity-30">
-                <a href="#" class="nav-link text-light"><h4>Categories</h4></a>
-            </li>
-
-            <?php
-                getCategories();
-            ?>
-           
-        </ul>
-
+<div class="row">
+    <!-- <div class="col-md-2 bg-light p-0">
+        
     </div>
 
     <div class="col-md-10">
-        <!-- products -->
+        
         <div class="row">
 
-        <?php
-            getProducts();
-            getUniqueCategories();
-            getUniqueBrands();
-            // $ip = getIPAddress();  
-            // echo 'User Real IP Address - '.$ip; 
-        ?>
-
         </div>
-    </div>
+    </div> -->
+
+    <?php
+
+        if(!isset($_SESSION['username'])){
+            include('./user/userLogin.php');
+        }else{
+            include('payment.php');
+        }
+
+    ?>
 
     
 </div>
