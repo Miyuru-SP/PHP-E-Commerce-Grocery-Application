@@ -1,6 +1,7 @@
 <?php
   include("includes\connect.php");
   include("functions/functions.php");
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,11 +16,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css -->
      <link rel="stylesheet" href="style.css">
-
+     <style>
+        body{
+            overflow-x: hidden;
+        }
+        .title{
+            padding-top: 100px;
+        }
+    </style>
 </head>
 <body>
     <!-- navbar -->
-     <div class="container-fluid p-0">
+     <div class="container-fluid p-0 fixed-top custom-navbar bg-body-secondary">
         <nav class="navbar navbar-expand-lg bg-body-secondary ">
         <div class="container-fluid">
        <img src="images/logo.png" alt="" class="logo">
@@ -35,13 +43,13 @@
                     <a class="nav-link" href="displayAll.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="/php/Ecommerce Web/user/userRegistration.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="cart.php">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <sup>
                             <?php
@@ -56,12 +64,35 @@
                 <input type="submit" value="Search" class="btn btn-outline-primary" name="search_data_product">
             </form>
             <ul class="navbar-nav me-2 mb-lg-0">
-                <li class="nav item">
-                    <a class="nav-link" href="#">Guest</a>
-                </li>
-                <li class="nav item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
+                
+                <?php
+                    if(!isset($_SESSION['username'])){
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='#'>Guest</a>
+                        </li>
+                        ";
+                    }else{
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='#'>".$_SESSION['username']."</a>
+                        </li>
+                        ";
+                    }
+                    if(!isset($_SESSION['username'])){
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='/php/Ecommerce Web/user/userLogin.php'>Login</a>
+                        </li>
+                        ";
+                    }else{
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='/php/Ecommerce Web/user/logOut.php'>Logout</a>
+                        </li>
+                        ";
+                    }
+                ?>
             </u>
             </div>
         </div>
@@ -70,7 +101,7 @@
 
 
 <!-- title -->
-<div>
+<div class="title">
     <h3 class="text-center">Hela Store</h3>
     <p class="text-center">
         Communication is the heart of ecommerce and community

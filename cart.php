@@ -1,6 +1,7 @@
 <?php
   include("./includes/connect.php");
   include("./functions/functions.php");
+  session_start();
 
   function removeCartItems(){
     global $conn;
@@ -80,11 +81,17 @@ echo updateCartItems();
       height: 80px;
       object-fit: contain;
     }
-  </style>
+        body{
+            overflow-x: hidden;
+        }
+        .title{
+            padding-top: 100px;
+        }
+    </style>
 </head>
 <body>
   <!-- navbar -->
-  <div class="container-fluid p-0">
+  <div class="container-fluid p-0 fixed-top custom-navbar bg-body-secondary">
     <nav class="navbar navbar-expand-lg bg-body-secondary">
       <div class="container-fluid">
         <img src="images/logo.png" alt="" class="logo">
@@ -100,7 +107,7 @@ echo updateCartItems();
               <a class="nav-link" href="displayAll.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="/php/Ecommerce Web/user/userRegistration.php">Register</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
@@ -121,12 +128,34 @@ echo updateCartItems();
             <input type="submit" value="Search" class="btn btn-outline-primary" name="search_data_product">
           </form>
           <ul class="navbar-nav me-2 mb-lg-0">
-            <li class="nav item">
-              <a class="nav-link" href="#">Guest</a>
-            </li>
-            <li class="nav item">
-              <a class="nav-link" href="#">Login</a>
-            </li>
+            <?php
+            if(!isset($_SESSION['username'])){
+              echo"
+              <li class='nav item'>
+                  <a class='nav-link' href='#'>Guest</a>
+              </li>
+              ";
+          }else{
+              echo"
+              <li class='nav item'>
+                  <a class='nav-link' href='#'>".$_SESSION['username']."</a>
+              </li>
+              ";
+          }
+                    if(!isset($_SESSION['username'])){
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='/php/Ecommerce Web/user/userLogin.php'>Login</a>
+                        </li>
+                        ";
+                    }else{
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href='/php/Ecommerce Web/user/logOut.php'>Logout</a>
+                        </li>
+                        ";
+                    }
+                ?>
           </ul>
         </div>
       </div>
@@ -134,7 +163,7 @@ echo updateCartItems();
   </div>
 
   <!-- title -->
-  <div>
+  <div class="title">
     <h3 class="text-center">Hela Store</h3>
     <p class="text-center">
       Communication is the heart of ecommerce and community
@@ -157,6 +186,7 @@ echo updateCartItems();
             <tr>
               <th>Product Title</th>
               <th>Product Image</th>
+              <th>Unit Price</th>
               <th>Quantity</th>
               <th>Total Price</th>
               <th>Remove</th>
@@ -184,7 +214,8 @@ echo updateCartItems();
             <tr>
               <td><?php echo $product_title ?></td>
               <td><img src="./admin/productImages/<?php echo $product_image ?>" class="cart_image"></td>
-              <td><input type="text" name="qty[<?php echo $product_id ?>]" value="<?php echo $quantity ?>" class="form-input w-50"></td>
+              <td><?php echo $product_price . ".00" ?></td>
+              <td><input type="text" name="qty[<?php echo $product_id ?>]" value="<?php echo $quantity ?>" class="form-input" size="3"></td>
               <td><?php echo $product_price * $quantity . ".00" ?></td>
               <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
               <td><input type="submit" value="Update" class="btn btn-warning" name="update_cart"></td>

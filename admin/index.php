@@ -21,6 +21,11 @@
             position: absolute;
             bottom:0;            
         }
+        
+        body{
+            overflow-x: hidden;
+        }
+
     </style>
 
 </head>

@@ -1,6 +1,7 @@
 <?php
 include("../includes/connect.php");
 include("../functions/functions.php");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +94,7 @@ if(isset($_POST['user_register'])){
     $user_username = $_POST['user_username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
+    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
     $conf_user_password = $_POST['conf_user_password'];
     $user_address = $_POST['user_address'];
     $user_contact = $_POST['user_contact'];
@@ -113,7 +115,7 @@ if(isset($_POST['user_register'])){
     else{
         //insert query
         move_uploaded_file($user_image_tmp,"./userImages/$user_image");
-        $insert_query = "insert into `users` (user_name, user_email, user_password, user_image, user_ip, user_address, user_mobile) values ('$user_username', '$user_email', '$user_password', '$user_image', '$user_ip', '$user_address', '$user_contact')";
+        $insert_query = "insert into `users` (user_name, user_email, user_password, user_image, user_ip, user_address, user_mobile) values ('$user_username', '$user_email', '$hash_password', '$user_image', '$user_ip', '$user_address', '$user_contact')";
         $sql_execute = mysqli_query($conn, $insert_query);
         if($sql_execute){
             echo "<script>alert('User registered successfully')</script>";
@@ -123,6 +125,15 @@ if(isset($_POST['user_register'])){
         
     }
 
+    $select_cart_items = "select * from `cart` where ip_address = '$user_ip'";
+    $result_cart = mysqli_query($conn, $select_cart_items);
+    $rows_count = mysqli_num_rows($result_cart);
+    if ($rows_count > 0) {
+        $_SESSION['username'] = $user_username;
+        echo "<script>alert('error'); window.open('userLogin.php','_self');</script>";
+    } else {
+        echo "<script>window.open('userLogin.php','_self');</script>";
+    }
 
 }
 
