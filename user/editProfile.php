@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Web</title>
+    <title>Edit Profile</title>
     <!-- bootstrap css  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- font awsome -->
@@ -119,76 +119,100 @@
 
 
 <!-- title -->
-<div class="title">
+<!-- <div class="title">
     <h3 class="text-center">Hela Store</h3>
     <p class="text-center">
         Communication is the heart of ecommerce and community
     </p>
-</div>
+</div> -->
 
 <?php
-//get user details
-global $conn;
-$username = $_SESSION['username'];
-$select_user = "SELECT * from `users` where user_name = '$username'";
-$result_user = mysqli_query($conn, $select_user);
+    //get user details
+    global $conn;
+    $username = $_SESSION['username'];
+    $select_user = "SELECT * from `users` where user_name = '$username'";
+    $result_user = mysqli_query($conn, $select_user);
 
     $row_data = mysqli_fetch_assoc($result_user);
+    $user_id = $row_data['user_id'];
     $user_name = $row_data['user_name'];
     $user_email = $row_data['user_email'];
     $user_address = $row_data['user_address'];
     $user_mobile = $row_data['user_mobile'];
-    $user_image = $row_data['user_image'];    
+    $user_image = $row_data['user_image'];  
 
+    //access changes
+    if(isset($_POST['user_update'])){
+        $update_id = $user_id;
+        $user_name = $_POST['user_username'];
+        $user_email = $_POST['user_email'];
+        $user_address = $_POST['user_address'];
+        $user_mobile = $_POST['user_mobile'];
+        $user_image = $_FILES['user_image']['name'];
+        $user_image_temp = $_FILES['user_image']['tmp_name'];
+        move_uploaded_file($user_image_temp, "./userImages/$user_image");
+
+        // update query
+        $update_data = "update `users` set user_name = '$user_name', user_email = '$user_email', user_address = '$user_address', user_image = '$user_image', user_mobile = '$user_mobile' where user_id = $update_id";
+        $result_query_update = mysqli_query($conn, $update_data);
+        if($result_query_update){
+            echo "<script>alert('Data updated successfully')</script>";
+            echo "<script>window.open('logOut.php', '_self')</script>";
+        }
+    }
 ?>
 
+<div class="container-fluid" style="padding-top:100px;">
+    <div class="my-3 col-lg-12 col-xl-7 card mx-auto">
+        <h2 class="text-center mt-3 mb-5">Edit Profile</h2>
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-lg-12 col-xl-12">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group row mb-4 justify-content-center">
+                        <label for="user_username" class="col-sm-2 col-form-label">User Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="user_username" id="user_username" class="form-control" value="<?php echo $user_name?>" autocomplete="off">                            
+                        </div>
+                    </div>
 
-<div class="container mt-5 m-auto">
-        <div class="row m-auto">
-            <div class="col-md-4 p-0">
-                <ul class="profile text-center" style = "list-style:none;">
-                    <?php echo "
-                    <li><img src='./userImages/$user_image' class='profile_img' alt='Profile Image'></li>
-                    "?>
-                </ul>
-            </div>
-            <div class="col-md-8 p-0">
-                <div class="row">
-                    <div class="col-md-2 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">User Name</li>
-                            <li class="mb-4">Email Address</li>
-                            <li class="mb-4">Address</li>
-                            <li class="mb-4">Mobile</li>
-                            <!-- <li class="mb-4">No of orders</li> -->
-                        </ul>
+                    <div class="form-group row mb-4 justify-content-center">
+                        <label for="user_email" class="col-sm-2 col-form-label">Email Address</label>
+                        <div class="col-sm-7">
+                            <input type="email" name="user_email" id="user_email" class="form-control" value="<?php echo $user_email?>" autocomplete="off"> 
+                        </div>
                     </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
+
+                    <div class="form-group row mb-4 justify-content-center">
+                        <label for="user_image" class="col-sm-2 col-form-label">Profile Picture</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="user_image" id="user_image" class="form-control"  autocomplete="off"> 
+                        </div>
                     </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4"><?php echo $user_name ?></li>
-                            <li class="mb-4"><?php echo $user_email ?></li>
-                            <li class="mb-4"><?php echo $user_address ?></li>
-                            <li class="mb-4"><?php echo $user_mobile ?></li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
+
+                    <div class="form-group row mb-4 justify-content-center">
+                        <label for="user_address" class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="user_address" id="user_address" class="form-control" value="<?php echo $user_address?>" autocomplete="off"> 
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group row mb-4 justify-content-center">
+                        <label for="user_mobile" class="col-sm-2 col-form-label">Mobile Number</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="user_mobile" id="user_mobile" class="form-control" value="<?php echo $user_mobile?>" autocomplete="off"> 
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-2 mb-4 text-center">
+                        <input type="submit" value="Update" class='btn btn-primary' name="user_update">
+                        
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-<div>
-    <center class='mb-5'><a href='editProfile.php?edit_profile'><button type='button' class='btn btn-primary'>Edit Profile</button></a></center>
 </div>
+
 
 
 

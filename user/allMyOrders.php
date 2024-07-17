@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Web</title>
+    <title>All My Orders</title>
     <!-- bootstrap css  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- font awsome -->
@@ -43,6 +43,14 @@
             text-align: center;
             width: 100%;
         }
+
+        th {
+            background-color: blue;
+            color: white;
+            padding-left: 1rem; /* Bootstrap px-3 equivalent */
+            padding-right: 1rem; /* Bootstrap px-3 equivalent */
+        }
+        
     </style>
 </head>
 <body style = "overflow-x: hidden;">
@@ -94,7 +102,8 @@
                         </li>
                         ";
                     }else{
-                        echo"                        
+                        echo"
+                        
                             <li class='nav-item dropdown'>
                                 <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                     ".$_SESSION['username']."
@@ -105,7 +114,8 @@
                                     <li><hr class='dropdown-divider'></li>
                                     <li><a class='dropdown-item' href='/php/Ecommerce Web/user/logOut.php'>Logout</a></li>
                                 </ul>
-                            </li>                           
+                            </li>
+                           
                         ";
                     }
                 ?>
@@ -127,69 +137,94 @@
 </div>
 
 <?php
-//get user details
-global $conn;
-$username = $_SESSION['username'];
-$select_user = "SELECT * from `users` where user_name = '$username'";
-$result_user = mysqli_query($conn, $select_user);
+// function get_user_order_details(){
+//     global $conn;
+//     $username = $_SESSION['username'];
+//     $get_details ="Select * from `users` where user_name = '$username'";
+//     $result_ordd = mysqli_query($conn, $get_details);
+//     while($row_query = mysqli_fetch_array($result_ordd)){
+//         $user_id = $row_query['user_id'];
+//         $get_orders = "select * from `orders` where user_id = $user_id and order_status = 'pending'";
+//         $result_order_query = mysqli_query($conn, $get_orders);
+//         $row_count = mysqli_num_rows($result_order_query);
+//         if($row_count>0){
+//             echo "<h3 class='text-center mt-5'>You have <span class = 'text-danger'>$row_count</span> pending orders</h3>
+//             <center class='mb-5'><a href='allMyOrders.php'><button type='button' class='btn btn-primary'>View Orders</button></a></center>
 
-    $row_data = mysqli_fetch_assoc($result_user);
-    $user_name = $row_data['user_name'];
-    $user_email = $row_data['user_email'];
-    $user_address = $row_data['user_address'];
-    $user_mobile = $row_data['user_mobile'];
-    $user_image = $row_data['user_image'];    
+//             ";
+            
+//         }else{
+//             echo "<h3 class='text-center mt-5 mb-3 '>You have no pending orders</h3>
+//             <center class='mb-5'><a href='../index.php'><button type='button' class='btn btn-primary'>Continue Shopping</button></a></center>
+//             ";  
+//         }
+//     }
+// }
 
 ?>
 
-
-<div class="container mt-5 m-auto">
-        <div class="row m-auto">
-            <div class="col-md-4 p-0">
-                <ul class="profile text-center" style = "list-style:none;">
-                    <?php echo "
-                    <li><img src='./userImages/$user_image' class='profile_img' alt='Profile Image'></li>
-                    "?>
-                </ul>
-            </div>
-            <div class="col-md-8 p-0">
-                <div class="row">
-                    <div class="col-md-2 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">User Name</li>
-                            <li class="mb-4">Email Address</li>
-                            <li class="mb-4">Address</li>
-                            <li class="mb-4">Mobile</li>
-                            <!-- <li class="mb-4">No of orders</li> -->
-                        </ul>
-                    </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
-                    </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4"><?php echo $user_name ?></li>
-                            <li class="mb-4"><?php echo $user_email ?></li>
-                            <li class="mb-4"><?php echo $user_address ?></li>
-                            <li class="mb-4"><?php echo $user_mobile ?></li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 <div>
-    <center class='mb-5'><a href='editProfile.php?edit_profile'><button type='button' class='btn btn-primary'>Edit Profile</button></a></center>
+    
 </div>
 
+<div class="px-3">
+    <table class="table table-bordered mt-5 px-3 mb-5">
+        <thead class="text-center"> 
+            <tr>
+                <th style="background-color:#0070FF; color: white;">Serial No</th>
+                <th style="background-color:#0070FF; color: white;">Order No</th>
+                <th style="background-color:#0070FF; color: white;">Amount Due</th>
+                <th style="background-color:#0070FF; color: white;">Total Products</th>
+                <th style="background-color:#0070FF; color: white;">Invoice No</th>
+                <th style="background-color:#0070FF; color: white;">Date</th>
+                <th style="background-color:#0070FF; color: white;">Complete/Incomplete</th>
+                <th style="background-color:#0070FF; color: white;">Status</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        <?php
+        // get_user_order_details();
+
+        $username = $_SESSION['username'];
+        $get_user ="Select * from `users` where user_name = '$username'";
+        $result = mysqli_query($conn, $get_user);
+        $row_fetch = mysqli_fetch_array($result);
+        $user_id = $row_fetch['user_id'];
+        
+        $get_orders = "select * from `orders` where user_id = $user_id";
+        $result_order = mysqli_query($conn, $get_orders);
+        $number = 1;
+
+        while($row_data = mysqli_fetch_assoc($result_order)){
+            $order_id = $row_data['order_id'];
+            $amount_due = $row_data['amount_due'];
+            $total_products = $row_data['total_products'];
+            $invoice_no = $row_data['invoice_number'];
+            $order_status = $row_data['order_status'];
+            if($order_status == 'pending'){
+                $order_status = 'Incomplete';
+            }else{
+                $order_status = 'Complete';
+            }
+            $order_date = $row_data['order_date'];
+            echo "
+            <tr>
+                <td>$number</td>
+                <td>$order_id</td>
+                <td>Rs. $amount_due</td>
+                <td>$total_products</td>
+                <td>$invoice_no</td>
+                <td>$order_date</td>
+                <td>$order_status</td>
+                <td><a href='confirmPayment.php'>Confirm</a></td>
+            </tr>
+            ";
+            $number++;
+        }
+    ?>
+        </tbody>
+    </table>
+</div>
 
 
 

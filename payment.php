@@ -1,6 +1,7 @@
 <?php
 include("./includes/connect.php");
 include_once("./functions/functions.php");
+@session_start();
 ?>
 
 
@@ -20,9 +21,10 @@ include_once("./functions/functions.php");
 <body>
 
     <?php
-
+    global $conn;
+    $username = $_SESSION['username'];
     $user_ip = getIPAddress();
-    $get_user = "select * from `users` where user_ip = '$user_ip'";
+    $get_user = "select * from `users` where user_name = '$username'";
     $result = mysqli_query($conn, $get_user);
     $run_query = mysqli_fetch_array($result);
     $user_id = $run_query['user_id'];
@@ -35,7 +37,7 @@ include_once("./functions/functions.php");
                 <a href="https://www.paypal.com" target="_blank"><img src="./images/paypal.jpg" alt="" width="100%"></a>
             </div>
             <div class="col-md-6 mt-5">
-            <a href="order.php?user_id=<?php echo $user_id; ?>" target="_blank"><h2 class="text-center">Pay Offline</h2></a>
+            <a href="order.php?user_id=<?php echo $user_id; ?>" target="_self"><h2 class="text-center">Pay Offline</h2></a>
             </div>
         </div>
     </div>

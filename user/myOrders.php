@@ -140,7 +140,11 @@ function get_user_order_details(){
         $result_order_query = mysqli_query($conn, $get_orders);
         $row_count = mysqli_num_rows($result_order_query);
         if($row_count>0){
-            echo "<h3 class='text-center mt-5'>You have <span class = 'text-danger'>$row_count</span> pending orders</h3>";
+            echo "<h3 class='text-center mt-5'>You have <span class = 'text-danger'>$row_count</span> pending orders</h3>
+            <center class='mb-5'><a href='allMyOrders.php'><button type='button' class='btn btn-primary'>View Orders</button></a></center>
+
+            ";
+            
         }else{
             echo "<h3 class='text-center mt-5 mb-3 '>You have no pending orders</h3>
             <center class='mb-5'><a href='../index.php'><button type='button' class='btn btn-primary'>Continue Shopping</button></a></center>
