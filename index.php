@@ -46,9 +46,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="displayAll.php">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/php/Ecommerce Web/user/userRegistration.php">Register</a>
-                </li>
+                <?php
+
+                    if(isset($_SESSION['username'])){
+                        echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/php/Ecommerce Web/user/myOrders.php'>Orders</a>
+                            </li>
+                        ";
+                    }else{
+                        echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/php/Ecommerce Web/user/userRegistration.php'>Register</a>
+                            </li>
+                        ";
+                    }
+
+                ?>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
