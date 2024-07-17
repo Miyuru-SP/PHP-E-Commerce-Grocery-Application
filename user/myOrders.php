@@ -129,66 +129,33 @@
 </div>
 
 <?php
-//get user details
-global $conn;
-$username = $_SESSION['username'];
-$select_user = "SELECT * from `users` where user_name = '$username'";
-$result_user = mysqli_query($conn, $select_user);
-
-while($row_data = mysqli_fetch_assoc($result_user)){
-    $user_name = $row_data['user_name'];
-    $user_email = $row_data['user_email'];
-    $user_address = $row_data['user_address'];
-    $user_mobile = $row_data['user_mobile'];
-    $user_image = $row_data['user_image'];    
+function get_user_order_details(){
+    global $conn;
+    $username = $_SESSION['username'];
+    $get_details ="Select * from `users` where user_name = '$username'";
+    $result_ordd = mysqli_query($conn, $get_details);
+    while($row_query = mysqli_fetch_array($result_ordd)){
+        $user_id = $row_query['user_id'];
+        $get_orders = "select * from `orders` where user_id = $user_id and order_status = 'pending'";
+        $result_order_query = mysqli_query($conn, $get_orders);
+        $row_count = mysqli_num_rows($result_order_query);
+        if($row_count>0){
+            echo "<h3 class='text-center mt-5'>You have <span class = 'text-danger'>$row_count</span> pending orders</h3>";
+        }else{
+            echo "<h3 class='text-center mt-5 mb-3 '>You have no pending orders</h3>
+            <center class='mb-5'><a href='../index.php'><button type='button' class='btn btn-primary'>Continue Shopping</button></a></center>
+            ";  
+        }
+    }
 }
 
 ?>
 
-
-<div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4 p-0">
-                <ul class="profile text-center" style = "list-style:none;">
-                    <?php echo "
-                    <li><img src='./userImages/$user_image' class='profile_img' alt='Profile Image'></li>
-                    "?>
-                </ul>
-            </div>
-            <div class="col-md-8 p-0">
-                <div class="row">
-                    <div class="col-md-2 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">User Name</li>
-                            <li class="mb-4">Email Address</li>
-                            <li class="mb-4">Address</li>
-                            <li class="mb-4">Mobile</li>
-                            <!-- <li class="mb-4">No of orders</li> -->
-                        </ul>
-                    </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <li class="mb-4">:</li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
-                    </div>
-                    <div class="col-md-1 p-0">
-                        <ul class="profile" style = "list-style:none;">
-                            <li class="mb-4"><?php echo $user_name ?></li>
-                            <li class="mb-4"><?php echo $user_email ?></li>
-                            <li class="mb-4"><?php echo $user_address ?></li>
-                            <li class="mb-4"><?php echo $user_mobile ?></li>
-                            <!-- <li class="mb-4">: username</li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div>
+    <?php
+        get_user_order_details();
+    ?>
+</div>
 
 
 

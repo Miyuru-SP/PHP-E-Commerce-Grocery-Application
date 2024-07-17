@@ -73,31 +73,28 @@
 
             <ul class="navbar-nav me-2 mb-lg-0">
                 
-                <?php
+            <?php
                     if(!isset($_SESSION['username'])){
                         echo"
                         <li class='nav item'>
-                            <a class='nav-link' href='#'>Guest</a>
+                            <a class='nav-link' href='./user/userLogin.php'>Login</a>
                         </li>
                         ";
                     }else{
                         echo"
-                        <li class='nav item'>
-                            <a class='nav-link' href='#'>".$_SESSION['username']."</a>
-                        </li>
-                        ";
-                    }
-                    if(!isset($_SESSION['username'])){
-                        echo"
-                        <li class='nav item'>
-                            <a class='nav-link' href='/php/Ecommerce Web/user/userLogin.php'>Login</a>
-                        </li>
-                        ";
-                    }else{
-                        echo"
-                        <li class='nav item'>
-                            <a class='nav-link' href='/php/Ecommerce Web/user/logOut.php'>Logout</a>
-                        </li>
+                        
+                            <li class='nav-item dropdown'>
+                                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                    ".$_SESSION['username']."
+                                </a>
+                                <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdown'>
+                                    <li><a class='dropdown-item' href='/php/Ecommerce Web/user/profile.php'>My Profile</a></li>
+                                    <li><a class='dropdown-item' href='/php/Ecommerce Web/user/myOrders.php'>My Orders</a></li>
+                                    <li><hr class='dropdown-divider'></li>
+                                    <li><a class='dropdown-item' href='/php/Ecommerce Web/user/logOut.php'>Logout</a></li>
+                                </ul>
+                            </li>
+                           
                         ";
                     }
                 ?>
