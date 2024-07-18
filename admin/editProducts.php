@@ -39,21 +39,21 @@
                     <div class="form-group row mb-4 justify-content-center">
                         <label for="product_title" class="col-sm-2 col-form-label">Product Title</label>
                         <div class="col-sm-7">
-                            <input type="text" name="product_title" id="product_title" class="form-control" value="<?php echo $product_title?>" autocomplete="off">                            
+                            <input type="text" required="required" name="product_title" id="product_title" class="form-control" value="<?php echo $product_title?>" autocomplete="off">                            
                         </div>
                     </div>
 
                     <div class="form-group row mb-4 justify-content-center">
                         <label for="product_description" class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-7">
-                            <input type="text" name="product_description" id="product_description" class="form-control" value="<?php echo $product_description?>" autocomplete="off"> 
+                            <input type="text" required="required" name="product_description" id="product_description" class="form-control" value="<?php echo $product_description?>" autocomplete="off"> 
                         </div>
                     </div>
 
                     <div class="form-group row mb-4 justify-content-center">
                         <label for="product_keywords" class="col-sm-2 col-form-label">Keywords</label>
                         <div class="col-sm-7">
-                            <input type="text" name="product_keywords" id="product_keywords" class="form-control" value="<?php echo $product_keywords?>" autocomplete="off"> 
+                            <input type="text" required="required" name="product_keywords" id="product_keywords" class="form-control" value="<?php echo $product_keywords?>" autocomplete="off"> 
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@
                     <div class="form-group row mb-4 justify-content-center">
                         <label for="product_image" class="col-sm-2 col-form-label">Product Image</label>
                         <div class="d-flex col-sm-7">
-                            <input type="file" name="product_image" id="product_image" class="form-control" autocomplete="off"> 
+                            <input type="file" required="required" name="product_image" id="product_image" class="form-control" autocomplete="off"> 
                             <img src="./productImages/<?php echo $product_image?>" alt="" class="product_img">
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                     <div class="form-group row mb-4 justify-content-center">
                         <label for="product_price" class="col-sm-2 col-form-label">Product Price</label>
                         <div class="col-sm-7">
-                            <input type="text" name="product_price" id="product_price" class="form-control" value="<?php echo $product_price?>" autocomplete="off"> 
+                            <input type="text"  required="required" name="product_price" id="product_price" class="form-control" value="<?php echo $product_price?>" autocomplete="off"> 
                         </div>
                     </div>
 

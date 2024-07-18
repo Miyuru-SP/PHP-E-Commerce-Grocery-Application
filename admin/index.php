@@ -73,6 +73,7 @@
                 <a href="insertProducts.php"><button type="button" class="btn btn-primary">Insert Products</button></a>
                 <a href="index.php?viewProducts"><button type="button" class="btn btn-primary">View Products</button></a>
                 <a href="index.php?viewCategories"><button type="button" class="btn btn-primary">view Categories</button></a>
+                <a href="index.php?viewBrands"><button type="button" class="btn btn-primary">view Brands</button></a>
                 <a href="index.php?insertCategory"><button type="button" class="btn btn-primary">Insert Category</button></a>
                 <a href="index.php?insertBrands"><button type="button" class="btn btn-primary">Insert Brands</button></a>
                 <a href="#"><button type="button" class="btn btn-primary">All Users</button></a>
@@ -98,6 +99,18 @@
             }
             if(isset($_GET['deleteProducts'])){
                 include('deleteProducts.php');
+            }
+            if(isset($_GET['viewCategories'])){
+                include('viewCategories.php');
+            }
+            if(isset($_GET['viewBrands'])){
+                include('viewBrands.php');
+            }
+            if(isset($_GET['editCategories'])){
+                include('editCategories.php');
+            }
+            if(isset($_GET['editBrands'])){
+                include('editBrands.php');
             }
         ?>
       </div>
