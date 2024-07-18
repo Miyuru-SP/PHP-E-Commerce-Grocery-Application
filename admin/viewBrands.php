@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Brands</title>
-</head>
-<body>
+
     <h3 class="text-center">All Brands</h3>
+    
     <table class="table table-bordered mt-5 px-3 mb-5">
         <thead class="text-center"> 
             <tr>
@@ -44,5 +38,5 @@
                     
         </tbody>
     </table>
-</body>
-</html>
+
+    
