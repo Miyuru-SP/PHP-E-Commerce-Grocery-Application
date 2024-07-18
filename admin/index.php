@@ -39,6 +39,11 @@
             object-fit:contain;
         }
 
+        .profile_img{
+            width:70px;
+            object-fit:contain;
+        }
+
     </style>
 
 </head>
@@ -77,7 +82,7 @@
                 <a href="index.php?viewBrands"><button type="button" class="btn btn-primary">view Brands</button></a>
                 <a href="index.php?insertCategory"><button type="button" class="btn btn-primary">Insert Category</button></a>
                 <a href="index.php?insertBrands"><button type="button" class="btn btn-primary">Insert Brands</button></a>
-                <a href="#"><button type="button" class="btn btn-primary">All Users</button></a>
+                <a href="index.php?listUsers"><button type="button" class="btn btn-primary">All Users</button></a>
                 <a href="index.php?listOrders"><button type="button" class="btn btn-primary">All Orders</button></a>
                 <a href="index.php?listPayments"><button type="button" class="btn btn-primary">All Payments</button></a>
             </div>
@@ -124,6 +129,9 @@
             }
             if(isset($_GET['listPayments'])){
                 include('listPayments.php');
+            }
+            if(isset($_GET['listUsers'])){
+                include('listUsers.php');
             }
         ?>
       </div>
