@@ -212,9 +212,9 @@ echo updateCartItems();
             <tr>
               <td><?php echo $product_title ?></td>
               <td><img src="./admin/productImages/<?php echo $product_image ?>" class="cart_image"></td>
-              <td><?php echo $product_price . ".00" ?></td>
+              <td>Rs. <?php echo number_format($product_price, 2) ?></td>
               <td><input type="text" name="qty[<?php echo $product_id ?>]" value="<?php echo $quantity ?>" class="form-input" size="3"></td>
-              <td><?php echo $product_price * $quantity . ".00" ?></td>
+              <td>Rs. <?php echo number_format($product_price * $quantity,2)?></td>
               <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
               <td><input type="submit" value="Update" class="btn btn-warning" name="update_cart"></td>
               <td><input type="submit" value="Remove" class="btn btn-danger" name="remove_cart"></td>

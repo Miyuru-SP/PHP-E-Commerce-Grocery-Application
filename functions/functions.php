@@ -22,6 +22,7 @@ function getProducts() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             echo "
             <div class='col-md-3 mb-4'>
@@ -29,7 +30,7 @@ function getProducts() {
                     <img src='$image_path' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'><strong>Price: RS.$product_price</strong></p>  
+                        <p class='card-text'><strong>RS. $formatted_price</strong></p>  
                         <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View more</a>
                     </div>
@@ -61,6 +62,7 @@ function getAllProducts() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             echo "
             <div class='col-md-3 mb-4'>
@@ -68,7 +70,7 @@ function getAllProducts() {
                     <img src='$image_path' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'><strong>Price: RS.$product_price</strong></p> 
+                        <p class='card-text'><strong>RS.$formatted_price</strong></p> 
                         <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View more</a>
                     </div>
@@ -105,6 +107,7 @@ function getUniqueCategories() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             echo "
             <div class='col-md-3 mb-4'>
@@ -112,7 +115,7 @@ function getUniqueCategories() {
                     <img src='$image_path' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'><strong>Price: RS.$product_price</strong></p> 
+                        <p class='card-text'><strong>RS.$formatted_price</strong></p> 
                         <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View more</a>
                     </div>
@@ -149,6 +152,7 @@ function getUniqueBrands() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             echo "
             <div class='col-md-3 mb-4'>
@@ -156,7 +160,7 @@ function getUniqueBrands() {
                     <img src='$image_path' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'><strong>Price: RS.$product_price</strong></p> 
+                        <p class='card-text'><strong>RS.$formatted_price</strong></p> 
                         <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View more</a>
                     </div>
@@ -225,6 +229,7 @@ function searchProducts() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             echo "
             <div class='col-md-3 mb-4'>
@@ -232,7 +237,7 @@ function searchProducts() {
                     <img src='$image_path' class='card-img-top' alt='$product_title'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                        <p class='card-text'><strong>Price: RS.$product_price</strong></p> 
+                        <p class='card-text'><strong>RS.$formatted_price</strong></p> 
                         <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View more</a>
                     </div>
@@ -265,6 +270,7 @@ function viewMoreProducts() {
             if (!file_exists($image_path)) {
                 echo "Image file not found: $image_path<br>";
             }
+            $formatted_price = number_format($product_price, 2);
 
             // echo "
             // <div class='col-md-3 mb-4'>
@@ -291,7 +297,7 @@ function viewMoreProducts() {
                                 <div class='card-body'>
                                     <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
-                                    <p class='card-text'><strong>Price: $$product_price</strong></p>
+                                    <p class='card-text'><strong>Rs.$formatted_price</strong></p>
                                     <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
                                     
                                 </div>

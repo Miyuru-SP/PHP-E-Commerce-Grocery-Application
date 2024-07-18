@@ -1,3 +1,8 @@
+<?php
+  include("../includes\connect.php");
+  include("../functions/functions.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +22,20 @@
             object-fit: contain;
         }
 
-        .footer{
-            position: absolute;
-            bottom:0;            
+        .footer {
+            background-color: #f8f9fa; /* Example background color */
+            padding: 10px;
+            text-align: center;
+            width: 100%;
         }
         
         body{
             overflow-x: hidden;
+        }
+
+        .product_img{
+            width:30%;
+            object-fit:contain;
         }
 
     </style>
@@ -59,8 +71,8 @@
      <div class="row ">        
             <div class="button text-center">
                 <a href="insertProducts.php"><button type="button" class="btn btn-primary">Insert Products</button></a>
-                <a href="#"><button type="button" class="btn btn-primary">View Products</button></a>
-                <a href="#"><button type="button" class="btn btn-primary">view Category</button></a>
+                <a href="index.php?viewProducts"><button type="button" class="btn btn-primary">View Products</button></a>
+                <a href="index.php?viewCategories"><button type="button" class="btn btn-primary">view Categories</button></a>
                 <a href="index.php?insertCategory"><button type="button" class="btn btn-primary">Insert Category</button></a>
                 <a href="index.php?insertBrands"><button type="button" class="btn btn-primary">Insert Brands</button></a>
                 <a href="#"><button type="button" class="btn btn-primary">All Users</button></a>
@@ -78,13 +90,22 @@
             if(isset($_GET['insertBrands'])){
                 include('insertBrands.php');
             }
+            if(isset($_GET['viewProducts'])){
+                include('viewProducts.php');
+            }
+            if(isset($_GET['editProducts'])){
+                include('editProducts.php');
+            }
+            if(isset($_GET['deleteProducts'])){
+                include('deleteProducts.php');
+            }
         ?>
       </div>
 
      <!-- footer-->
-<div class="container-fluid bg-body-secondary p-2 text-center footer">
-    <p>All rights reserved and designed by Miyuru_S_P - 2024</p>
-</div> 
+<?php 
+    include("../includes/footer.php");
+?> 
 
 
 <!-- bootstrap js  -->
