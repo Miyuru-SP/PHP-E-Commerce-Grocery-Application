@@ -1,6 +1,7 @@
 <?php
   include("../includes\connect.php");
   include("../functions/functions.php");
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +58,24 @@
                 <a href="index.php"><img src="../images/logo.png" alt="" class="logo"></a>
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Welcome Admin</a>
+
+                    <?php
+                    if(isset($_SESSION['admin_name'])){
+                        echo"
+                        <li class='nav item'>
+                            <a class='nav-link' href=''>".$_SESSION['admin_name']."</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">logout</a>
+                        <li class='nav item'>
+                            <a class='nav-link' href='adminLogout.php'>Logout</a>
                         </li>
+                        ";
+                    }else{
+                        echo"<li class='nav item'>
+                            <a class='nav-link' href='adminLogin.php'>Login</a>
+                        </li>";
+
+                    }
+                    ?>
                     </ul>
                 </nav>
             </div>
@@ -76,10 +89,10 @@
     <!-- links -->
      <div class="row ">        
             <div class="button text-center">
-                <a href="insertProducts.php"><button type="button" class="btn btn-primary">Insert Products</button></a>
                 <a href="index.php?viewProducts"><button type="button" class="btn btn-primary">View Products</button></a>
                 <a href="index.php?viewCategories"><button type="button" class="btn btn-primary">view Categories</button></a>
                 <a href="index.php?viewBrands"><button type="button" class="btn btn-primary">view Brands</button></a>
+                <a href="insertProducts.php"><button type="button" class="btn btn-primary">Insert Products</button></a>
                 <a href="index.php?insertCategory"><button type="button" class="btn btn-primary">Insert Category</button></a>
                 <a href="index.php?insertBrands"><button type="button" class="btn btn-primary">Insert Brands</button></a>
                 <a href="index.php?listUsers"><button type="button" class="btn btn-primary">All Users</button></a>
